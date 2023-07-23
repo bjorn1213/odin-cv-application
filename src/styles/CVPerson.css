@@ -1,0 +1,29 @@
+
+.personal-info-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+}
+
+.personal-description {
+    grid-column: 1/-1;
+}
+
+.avatar-dummy {
+    height: 250px;
+    width: 200px;
+    background-color: #b5dbff;
+    margin: 20px;
+    border-radius: 10%;
+}
+
+.personal-info {
+    justify-content: center;
+    align-self: center;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
