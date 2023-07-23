@@ -37,17 +37,17 @@ const workItems = [
 
 const eduItems = [
     itemGenerator(
-        new Date(2015, 1, 1),
-        new Date(2018, 1, 1),
-        "Main education",
-        "Main university",
-        null
-    ),
-    itemGenerator(
         new Date(2014, 1, 1),
         new Date(2015, 1, 1),
         "Prep course",
         "Remote via XXX",
+        null
+    ),
+    itemGenerator(
+        new Date(2015, 1, 1),
+        new Date(2018, 1, 1),
+        "Main education",
+        "Main university",
         null
     ),
 ]

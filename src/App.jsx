@@ -7,8 +7,8 @@ function App() {
 
   return (
     <>
-      <CVSection entryData={entryData.eduItems}  sectionTitle={"Education"}/>
       <CVSection entryData={entryData.workItems} sectionTitle={"Work experience"} />
+      <CVSection entryData={entryData.eduItems}  sectionTitle={"Education"}/>
     </>
   )
 }
