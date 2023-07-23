@@ -3,10 +3,8 @@ import '../styles/CVSection.css'
 import CVEntry from './CVEntry'
 
 
-function CVSection() {
-    const dummy = [0, 3, 4];
+function CVSection({entryData, sectionTitle}) {
     const [showSection, setShowSection] = useState(true);
-    const sectionTitle = "Section title"
 
     function toggleSection() {
         setShowSection(!showSection);
@@ -24,7 +22,7 @@ function CVSection() {
                 <h2>{sectionTitle}</h2>
             </div>
             <div className="entry-container">
-                {dummy.map((_, i) => showSection ? <CVEntry key={i}/> : null)}
+                {entryData.map((entry) => showSection ? <CVEntry key={entry.id} entry={entry}/> : null)}
             </div>
         </div>
         </>

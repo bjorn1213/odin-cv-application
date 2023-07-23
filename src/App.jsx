@@ -1,16 +1,14 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import CVSection from './components/CVSection'
 import './App.css'
+import entryData from './entryData'
 
 function App() {
 
   return (
     <>
-      <CVSection />
-      <CVSection />
-      <CVSection />
+      <CVSection entryData={entryData.eduItems}  sectionTitle={"Education"}/>
+      <CVSection entryData={entryData.workItems} sectionTitle={"Work experience"} />
     </>
   )
 }
