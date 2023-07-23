@@ -1,12 +1,11 @@
 .cv-entry {
     width: 80%;
-    margin: 100px auto;
 
     display: grid;
     grid-template-columns: auto 4fr 1fr;
     grid-template-rows: auto auto;
 
-    border: 1px solid black;
+    border-top: 1px solid black;
     padding: 10px;
 }
 
@@ -17,6 +16,7 @@
 .date-label {
     grid-row: 1/-1;
     margin: 0 10px;
+    font-size: 0.8rem;
 }
 
 p {
@@ -25,4 +25,10 @@ p {
 
 .institution {
     text-align: right;
+    align-self: end;
+}
+
+.cv-title {
+    font-size: 1.5rem;
+    align-self: end;
 }
