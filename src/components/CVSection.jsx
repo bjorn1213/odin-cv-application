@@ -3,8 +3,9 @@ import "../styles/CVSection.css";
 import CVEntry from "./CVEntry";
 import { compareDesc } from "date-fns";
 
-function CVSection({ entryData, sectionTitle }) {
+function CVSection({ entryData, sectionTitle, editMode}) {
   const [showSection, setShowSection] = useState(true);
+  const [title, setTitle] = useState(sectionTitle);
 
   function toggleSection() {
     setShowSection(!showSection);
@@ -30,11 +31,11 @@ function CVSection({ entryData, sectionTitle }) {
           <button className="show-hide-section" onClick={toggleSection}>
             {showSection ? "X" : "O"}
           </button>
-          <h2>{sectionTitle}</h2>
+          {editMode ? <input value={title} onChange={(e) => setTitle(e.target.value)}/> : <h2>{title}</h2>}
         </div>
         <div className="entry-container">
           {entryData.sort(entrySorter).map((entry) =>
-              showSection ? <CVEntry key={entry.id} entry={entry} /> : null
+              showSection ? <CVEntry key={entry.id} entry={entry} editMode={editMode}/> : null
             )}
         </div>
       </div>
