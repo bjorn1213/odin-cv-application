@@ -1,0 +1,9 @@
+
+.app-container {
+    display:grid;
+    grid-template-columns: 1fr 4fr 1fr;
+}
+
+.page-container {
+    grid-column: 2;
+}

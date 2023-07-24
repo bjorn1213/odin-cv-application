@@ -1,6 +1,4 @@
 .cv-entry {
-    width: 80%;
-
     display: grid;
     grid-template-columns: auto 4fr 1fr;
     grid-template-rows: auto auto;
