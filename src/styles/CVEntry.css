@@ -17,6 +17,10 @@
     font-size: 0.8rem;
 }
 
+.date-label input {
+    display: block;
+}
+
 p {
     margin: 0
 }

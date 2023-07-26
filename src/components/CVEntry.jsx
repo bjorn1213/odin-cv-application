@@ -1,17 +1,39 @@
 import { useState } from 'react'
 
 import '../styles/CVEntry.css'
-import {format} from 'date-fns'
+import {format, parse, isValid} from 'date-fns'
 
 function DateLabel({startDate, endDate, editMode}) {
     const targetFormat = "yyyy-MM";
+    const defaultFormat = "yyyy-MM-dd"
+    const [start, setStart] = useState(startDate);
+    const [end, setEnd] = useState(endDate);
 
-    return (
-        <div className="date-label">
-            <p>{format(startDate, targetFormat)}</p>
-            <p>{endDate ? format(endDate, targetFormat) : "present"}</p>
-        </div>
-    )
+    if (editMode) {
+        return (
+            <div className="date-label">
+                <input type="date"
+                        value={format(start, defaultFormat)}
+                        onChange={(e) => {
+                            const newDate = parse(e.target.value, defaultFormat, new Date())
+                            setStart(isValid(newDate) ? newDate : start)}
+                        } />
+                <input type="date"
+                        value={end ? format(end, defaultFormat) : ""}
+                        onChange={(e) => {
+                            const newDate = parse(e.target.value, defaultFormat, new Date())
+                            setEnd(isValid(newDate) ? newDate : null)}
+                        } />
+            </div>
+        )
+    } else {
+        return (
+            <div className="date-label">
+                <p>{format(start, targetFormat)}</p>
+                <p>{end ? format(end, targetFormat) : "present"}</p>
+            </div>
+        )
+    }
 }
 
 function CVTitle({itemTitle, editMode}) {
