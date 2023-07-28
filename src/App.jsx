@@ -24,6 +24,7 @@ function App() {
   return (
     <>
     <div className="app-container">
+      <EditButton editMode={editMode} toggleEdit={toggleEdit}/>
       <CVContainer>
         <CVPerson editMode={editMode}/>
         <CVSection editMode={editMode} entryData={entryData.workItems} sectionTitle={"Work experience"} />

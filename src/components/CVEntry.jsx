@@ -43,7 +43,7 @@ function CVTitle({itemTitle, editMode}) {
     const [title, setTitle] = useState(itemTitle);
 
     if (editMode) {
-        return <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        return <input className="cv-title" value={title} onChange={(e) => setTitle(e.target.value)} />
     } else {
         return <p className="cv-title"><b>{title}</b></p>
     }
@@ -53,7 +53,7 @@ function CVInstitution({itemInstitution, editMode}) {
     const [institution, setInstitution] = useState(itemInstitution);
 
     if (editMode) {
-        return <input value={institution} onChange={(e) => setInstitution(e.target.value)}/>
+        return <input className="institution" value={institution} onChange={(e) => setInstitution(e.target.value)}/>
     } else {
         return <p className="institution"><em>{itemInstitution}</em></p>
     }

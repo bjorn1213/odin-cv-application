@@ -34,3 +34,7 @@ p {
     font-size: 1.5rem;
     align-self: end;
 }
+
+textarea{
+    resize:vertical;
+}
