@@ -4,14 +4,49 @@ import CVEntry from "./CVEntry";
 import { compareDesc } from "date-fns";
 
 function CVSection({ entryData, sectionTitle, editMode}) {
+  const entryObject = {};
+
+  for (let entry of entryData){
+    entryObject[entry.id] = entry;
+  }
+
   const [showSection, setShowSection] = useState(true);
   const [title, setTitle] = useState(sectionTitle);
+  const [entries, setEntries] = useState(entryObject);
+
+  function changeStartDate(entryID){
+    return function(newStartDate){
+      console.log(entryID);
+      console.log(newStartDate);
+
+      const entriesLoc = {
+        ...entries, 
+        [entryID]: {...entries[entryID],
+                    "startDate": newStartDate}
+      }
+      setEntries(entriesLoc);
+    }
+  }
+  
+  function changeEndDate(entryID){
+    return function(newEndDate){
+      const entriesLoc = {
+        ...entries, 
+        [entryID]: {...entries[entryID],
+                    "endDate": newEndDate}
+      }
+      setEntries(entriesLoc);
+    }
+  }
 
   function toggleSection() {
     setShowSection(!showSection);
   }
 
-  function entrySorter(entryA, entryB){
+  function entrySorter(firstEntry, secondEntry){
+    const entryA = entries[firstEntry.id];
+    const entryB = entries[secondEntry.id];
+
     // prep start and end dates, replace if necessary
     const startA = entryA.startDate instanceof  Date ? entryA.startDate : new Date(1900, 0);
     const startB = entryB.startDate instanceof  Date ? entryB.startDate : new Date(1900, 0);
@@ -35,7 +70,13 @@ function CVSection({ entryData, sectionTitle, editMode}) {
         </div>
         <div className="entry-container">
           {entryData.sort(entrySorter).map((entry) =>
-              showSection ? <CVEntry key={entry.id} entry={entry} editMode={editMode}/> : null
+              showSection ? <CVEntry 
+                                key={entry.id} 
+                                entry={entries[entry.id]} 
+                                editMode={editMode}
+                                setStartDate={changeStartDate(entry.id)}
+                                setEndDate={changeEndDate(entry.id)}
+                            /> : null
             )}
         </div>
       </div>

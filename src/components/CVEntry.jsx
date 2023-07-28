@@ -3,34 +3,37 @@ import { useState } from 'react'
 import '../styles/CVEntry.css'
 import {format, parse, isValid} from 'date-fns'
 
-function DateLabel({startDate, endDate, editMode}) {
+function DateLabel({startDate, endDate, editMode, setStartDate, setEndDate}) {
     const targetFormat = "yyyy-MM";
     const defaultFormat = "yyyy-MM-dd"
-    const [start, setStart] = useState(startDate);
-    const [end, setEnd] = useState(endDate);
+    
+    function dummy(newDate){
+
+        setStartDate(newDate);
+    }
 
     if (editMode) {
         return (
             <div className="date-label">
                 <input type="date"
-                        value={format(start, defaultFormat)}
+                        value={format(startDate, defaultFormat)}
                         onChange={(e) => {
                             const newDate = parse(e.target.value, defaultFormat, new Date())
-                            setStart(isValid(newDate) ? newDate : start)}
+                            dummy(isValid(newDate) ? newDate : startDate)}
                         } />
                 <input type="date"
-                        value={end ? format(end, defaultFormat) : ""}
+                        value={endDate ? format(endDate, defaultFormat) : ""}
                         onChange={(e) => {
                             const newDate = parse(e.target.value, defaultFormat, new Date())
-                            setEnd(isValid(newDate) ? newDate : null)}
+                            setEndDate(isValid(newDate) ? newDate : null)}
                         } />
             </div>
         )
     } else {
         return (
             <div className="date-label">
-                <p>{format(start, targetFormat)}</p>
-                <p>{end ? format(end, targetFormat) : "present"}</p>
+                <p>{format(startDate, targetFormat)}</p>
+                <p>{endDate ? format(endDate, targetFormat) : "present"}</p>
             </div>
         )
     }
@@ -65,10 +68,17 @@ function CVBlurb({itemText, editMode}){
     }
 }
 
-function CVEntry({entry, editMode}) {
+function CVEntry(props) {
+    const entry = props.entry;
+    const editMode = props.editMode;
+
     return (
         <div className="cv-entry">
-            <DateLabel editMode={editMode} startDate={entry.startDate} endDate={entry.endDate}/>
+            <DateLabel editMode={editMode} 
+                startDate={entry.startDate}
+                endDate={entry.endDate}
+                setStartDate={props.setStartDate}
+                setEndDate={props.setEndDate}/>
             <CVTitle editMode={editMode} itemTitle={entry.title}/>
             <CVInstitution editMode={editMode} itemInstitution={entry.institution}/>
             <CVBlurb editMode={editMode} itemText={entry.description}/>
